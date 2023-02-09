@@ -52,10 +52,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:25'],
             'last_name' => ['required', 'string', 'max:25'],
-            'gender' => ['required'],
-            'photo' => ['required'],
+            'gender_id' => ['required', 'integer'],
+            'role_id' => ['required', 'integer'],
+            'photo' => ['required', 'image', 'mimes:jpeg,jpg,png'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'regex:/^(?=.*[0-9]).+$/', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -74,8 +75,8 @@ class RegisterController extends Controller
         }
 
         return User::create([
-            'role_id' => 2,
-            'gender_id' => $data['gender'],
+            'role_id' => $data['role_id'],
+            'gender_id' => $data['gender_id'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'photo' => $proofNameToStore,

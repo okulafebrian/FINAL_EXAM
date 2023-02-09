@@ -12,13 +12,13 @@
     </div>
 @endif
 
-@if (session('failed'))
+@if (session('error'))
     <div class="modal fade show alert" style="z-index: 9999;" tabindex="-1">
         <div class="modal-dialog" role="document">
-            <div class="modal-content border-0 shadow-sm rounded-3" style="background-color: #3364a0">
+            <div class="modal-content border-0 shadow-sm rounded-3" style="background-color: #a03333">
                 <div class="modal-body text-light">
                     <h6 class="m-0">
-                        <i class="fa-solid fa-circle-xmark me-1"></i> {!! session('failed') !!}
+                        <i class="fa-solid fa-circle-xmark me-1"></i> {!! session('error') !!}
                     </h6>
                 </div>
             </div>

@@ -6,9 +6,16 @@ use App\Models\Gender;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+        $this->middleware(['admin'])->except('show', 'update');
+    }
+
     public function index()
     {   
         return view('users.index', [
@@ -44,7 +51,34 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|string|max:25',
+            'last_name' => 'required|string|max:25',
+            'gender' => 'required',
+            'email' => 'required|string',
+            'photo' => 'image|mimes:jpeg,jpg,png'
+        ]);
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo != NULL)
+                Storage::delete('public/users/' . $user->photo);
+            
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $proofNameToStore = $request->input('first_name') . '_' . $request->input('last_name') . '.' . $extension;
+            $request->file('photo')->storeAs('public/users', $proofNameToStore);
+        } else {
+            $proofNameToStore = $user->photo;
+        }
+        
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender_id' => $request->gender,
+            'email' => $request->email,
+            'photo' => $proofNameToStore,
+        ]);
+
+        return redirect()->back()->with('success', 'Data successfully updated.');
     }
 
     public function destroy(User $user)

@@ -40,17 +40,18 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="gender" class="form-label">{{ __('Gender') }}</label>
-                                <fieldset id="gender">
+                                <label for="gender_id" class="form-label">{{ __('Gender') }}</label>
+                                <fieldset id="gender_id">
                                     @foreach ($genders as $gender)
-                                        <input type="radio" class="btn-check" id="{{ $gender->id }}" name="gender"
-                                            value="{{ $gender->id }}" {{ $loop->first ? 'required' : '' }}>
+                                        <input type="radio" class="btn-check" id="{{ $gender->id }}"
+                                            name="gender_id" value="{{ $gender->id }}"
+                                            {{ $loop->first ? 'required' : '' }}>
                                         <label for="{{ $gender->id }}"
                                             class="btn btn-outline-primary px-3 rounded-pill">{{ $gender->description }}</label>
                                     @endforeach
                                 </fieldset>
 
-                                @error('gender')
+                                @error('gender_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -63,6 +64,24 @@
                                     class="form-control @error('photo') is-invalid @enderror" name="photo" required>
 
                                 @error('photo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="role_id" class="form-label">{{ __('Role') }}</label>
+                                <select class="form-select" id="role_id" name="role_id" required>
+                                    <option selected>Select role</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}">
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('role_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

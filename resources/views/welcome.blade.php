@@ -9,4 +9,6 @@
             <a href="{{ route('login') }}" class="btn btn-primary btn-lg rounded-3">Login</a>
         </div>
     </div>
+
+    <x-footer></x-footer>
 </x-app>

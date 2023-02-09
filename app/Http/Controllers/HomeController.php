@@ -7,16 +7,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
-{
-    public function index()
+{   
+    public function __invoke()
     {
-        return view('index');
-    }
-
-    public function home()
-    {
-        return view('home', [
-            'items' => Item::doesntHave('cart')->doesntHave('order')->paginate(10),
-        ]);
+        if (auth()->check()) {
+            return view('home', [
+                'items' => Item::doesntHave('cart')->doesntHave('order')->paginate(10),
+            ]);
+        } else {
+            return view('welcome');
+        }
     }
 }

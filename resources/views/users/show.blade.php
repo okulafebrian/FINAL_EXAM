@@ -5,8 +5,10 @@
             <div class="col-3">
                 <img src="/storage/users/{{ auth()->user()->photo }}" class="rounded-4" width="100%">
             </div>
+
             <div class="col-7">
-                <form method="POST" action="{{ route('users.update', auth()->user()->id) }}">
+                <form method="POST" action="{{ route('users.update', auth()->user()->id) }}"
+                    enctype="multipart/form-data">
                     @csrf
 
                     <div class="row mb-3">

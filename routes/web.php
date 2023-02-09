@@ -11,13 +11,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/', HomeController::class)->name('home');
 Route::resource('items', ItemController::class);
 Route::resource('orders', OrderController::class);
 Route::resource('carts', CartController::class);
 Route::resource('roles', RoleController::class);
-
 
 Route::prefix('users')->name('users.')->group(function () {
     Route::put('update-role/{user}', [UserController::class, 'updateRole'])->name('update-role');
