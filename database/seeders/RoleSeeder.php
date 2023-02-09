@@ -11,10 +11,10 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->insert([
             [
-                'name' => 'ADMIN'
+                'name' => 'Admin'
             ],
             [
-                'name' => 'USER'
+                'name' => 'User'
             ]
         ]);
     }

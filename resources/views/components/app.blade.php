@@ -21,6 +21,8 @@
 
 <body>
     <div id="app">
+        <x-alert></x-alert>
+
         <main>
             {{ $slot }}
         </main>

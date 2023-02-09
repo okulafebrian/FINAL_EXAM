@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gender extends Model
+class Cart extends Model
 {
     use HasFactory;
-    protected $table = 'genders';
+    protected $table = 'carts';
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

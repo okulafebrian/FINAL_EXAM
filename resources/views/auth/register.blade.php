@@ -10,7 +10,7 @@
                                     class="text-decoration-none">Login</a></small>
                         </div>
 
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -60,7 +60,7 @@
                             <div class="mb-3">
                                 <label for="photo" class="form-label">{{ __('Display Picture') }}</label>
                                 <input id="photo" type="file"
-                                    class="form-control @error('photo') is-invalid @enderror" name="photo" equired>
+                                    class="form-control @error('photo') is-invalid @enderror" name="photo" required>
 
                                 @error('photo')
                                     <span class="invalid-feedback" role="alert">
