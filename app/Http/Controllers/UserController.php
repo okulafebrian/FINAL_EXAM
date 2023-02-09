@@ -6,6 +6,7 @@ use App\Models\Gender;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -13,7 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware(['auth']);
-        $this->middleware(['admin'])->except('show', 'update');
+        $this->middleware(['admin'])->except('show', 'update', 'updatePassword');
     }
 
     public function index()
@@ -95,5 +96,18 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index')->with('success', 'Role successfully changed.');
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {   
+        $request->validate([
+            'password' => 'required|string|regex:/^(?=.*[0-9]).+$/|min:8|confirmed',
+        ]);
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+        
+        return redirect()->back()->with('success', 'Password successfully changed.');
     }
 }

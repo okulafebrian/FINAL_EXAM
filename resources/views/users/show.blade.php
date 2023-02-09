@@ -94,10 +94,15 @@
                     </div>
 
                     @method('PUT')
-                    <button type="submit" class="btn btn-primary w-100">
-                        {{ __('Save') }}
-                    </button>
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 mb-3">{{ __('Save') }}</button>
                 </form>
+
+                <button type="button" class="btn btn-outline-primary w-100 rounded-3" data-bs-toggle="modal"
+                    data-bs-target="#change-password">
+                    <i class="bi bi-key"></i> {{ __('Change password') }}
+                </button>
+
+                <x-change-password></x-change-password>
             </div>
         </div>
     </div>

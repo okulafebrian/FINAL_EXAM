@@ -115,7 +115,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
+                                <label for="password-confirm" class="form-label">{{ __('Confirm password') }}</label>
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" required autocomplete="new-password">
 

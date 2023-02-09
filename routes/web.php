@@ -19,6 +19,7 @@ Route::resource('roles', RoleController::class);
 
 Route::prefix('users')->name('users.')->group(function () {
     Route::put('update-role/{user}', [UserController::class, 'updateRole'])->name('update-role');
+    Route::put('update-password/{user}', [UserController::class, 'updatePassword'])->name('update-password');
 });
 Route::resource('users', UserController::class);
 
